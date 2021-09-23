@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'TriangleChallenge'
-include('app')
+include('app', 'triangleslib')
