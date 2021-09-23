@@ -11,10 +11,10 @@ import java.util.stream.Stream;
 import com.recruitment.triangles.Triangle.Type;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 
 @DisplayName("Triangle class units")
@@ -74,34 +74,14 @@ class TriangleTest {
         assertEquals(t.classify(), type);
     }
 
-    @ParameterizedTest
-    @ValueSource(doubles = { 1.0, 1.1 })
-    void setters_update_valid_side_lengths(double newLength) {
-        Triangle t = new Triangle(1.0, 1.0, 1.0);
+    // TODO remove... this seems too weird.
+    @Test
+    void getters_work_reliably() {
+        Triangle t = new Triangle(2.0, 3.0, 4.0);
         assertAll("Getters",
-                () -> {
-                    t.setSideA(newLength);
-                    assertEquals(newLength, t.getSideA());
-                },
-                () -> {
-                    t.setSideB(newLength);
-                    assertEquals(newLength, t.getSideB());
-                },
-                () -> {
-                    t.setSideC(newLength);
-                    assertEquals(newLength, t.getSideC());
-                }
-        );
-    }
-
-    @ParameterizedTest
-    @ValueSource(doubles = { 0.0, -0.1, 2.0, Double.NEGATIVE_INFINITY })
-    void setters_do_not_update_invalid_side_lengths(double newLength) {
-        Triangle t = new Triangle(1.0, 1.0, 1.0);
-        assertAll("Setters",
-            () -> assertThrows(IllegalArgumentException.class, () -> t.setSideA(newLength)),
-            () -> assertThrows(IllegalArgumentException.class, () -> t.setSideB(newLength)),
-            () -> assertThrows(IllegalArgumentException.class, () -> t.setSideC(newLength))
+            () -> assertEquals(2.0, t.getSideA()),
+            () -> assertEquals(3.0, t.getSideB()),
+            () -> assertEquals(4.0, t.getSideC())
         );
     }
 }

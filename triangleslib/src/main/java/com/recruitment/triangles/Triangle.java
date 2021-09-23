@@ -29,25 +29,30 @@ public class Triangle {
 
 
     // Side lengths
-    private double a, b, c;
+    private final double a, b, c;
 
 
     /**
      * Construct a new Triangle.
      * Will validate the lengths and fail with an exception if impossible triangle.
+     *
+     * @throws IllegalArgumentException if the triangle resulting from updating
+     *                                  the side lengths would be invalid.
      */
     public Triangle(double sideA, double sideB, double sideC) {
-        setLengths(sideA, sideB, sideC);
+        if (isValid(sideA, sideB, sideC)) {
+            this.a = sideA;
+            this.b = sideB;
+            this.c = sideC;
+        } else {
+            throw new IllegalArgumentException("Invalid triangle side lengths.");
+        }
     }
 
 
     public double getSideA() { return this.a; }
     public double getSideB() { return this.b; }
     public double getSideC() { return this.c; }
-
-    public void setSideA(double value) { setLengths(value, this.b, this.c); }
-    public void setSideB(double value) { setLengths(this.a, value, this.c); }
-    public void setSideC(double value) { setLengths(this.a, this.b, value); }
 
 
     /**
@@ -57,25 +62,6 @@ public class Triangle {
         if (a == b && b == c)                { return Type.EQUILATERAL; } // All sides equal
         else if (a == b || b == c || a == c) { return Type.ISOSCELES;   } // Two sides equal
         else                                 { return Type.SCALENE;     } // No two sides equal
-    }
-
-
-    /**
-     * Update the triangle side lengths.
-     *
-     * Triangle "invariants" enforced by calling the static isValid.
-     *
-     * @throws IllegalArgumentException if the triangle resulting from updating
-     *                                  the side lengths would be invalid.
-     */
-    private void setLengths(double a, double b, double c) {
-        if (isValid(a, b, c)) {
-            this.a = a;
-            this.b = b;
-            this.c = c;
-        } else {
-            throw new IllegalArgumentException("Invalid triangle side lengths.");
-        }
     }
 }
 
