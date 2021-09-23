@@ -24,7 +24,7 @@ public class App {
 
         try {
             Triangle t = parseTriangle(args);
-            System.out.println(t.classify());
+            System.out.println(t.getType());
         } catch (IllegalArgumentException e) {
             System.out.println("Error when running with given arguments: " + e.getMessage());
             System.exit(1);

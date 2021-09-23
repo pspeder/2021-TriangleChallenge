@@ -30,6 +30,7 @@ public class Triangle {
 
     // Side lengths
     private final double a, b, c;
+    private final Type type;
 
 
     /**
@@ -41,9 +42,10 @@ public class Triangle {
      */
     public Triangle(double sideA, double sideB, double sideC) {
         if (isValid(sideA, sideB, sideC)) {
-            this.a = sideA;
-            this.b = sideB;
-            this.c = sideC;
+            this.a    = sideA;
+            this.b    = sideB;
+            this.c    = sideC;
+            this.type = classify(sideA, sideB, sideC);
         } else {
             throw new IllegalArgumentException("Invalid triangle side lengths.");
         }
@@ -53,12 +55,12 @@ public class Triangle {
     public double getSideA() { return this.a; }
     public double getSideB() { return this.b; }
     public double getSideC() { return this.c; }
-
+    public Type getType() { return this.type; }
 
     /**
      * Determine the type of this Triangle.
      */
-    public Type classify() {
+    public static Type classify(double a, double b, double c) {
         if (a == b && b == c)                { return Type.EQUILATERAL; } // All sides equal
         else if (a == b || b == c || a == c) { return Type.ISOSCELES;   } // Two sides equal
         else                                 { return Type.SCALENE;     } // No two sides equal

@@ -51,13 +51,14 @@ class TriangleTest {
 
     @ParameterizedTest
     @MethodSource("com.recruitment.triangles.TriangleTest#validTriangleSides")
-    void constructor_succeeds_if_valid(double a, double b, double c, Type ignored) {
+    void constructor_succeeds_if_valid(double a, double b, double c, Type type) {
         Triangle t = new Triangle(a, b, c);
         assertNotNull(t);
         assertAll("All sides set correctly",
             () -> assertEquals(t.getSideA(), a),
             () -> assertEquals(t.getSideB(), b),
-            () -> assertEquals(t.getSideC(), c)
+            () -> assertEquals(t.getSideC(), c),
+            () -> assertEquals(t.getType(), type)
         );
     }
 
@@ -70,8 +71,7 @@ class TriangleTest {
     @ParameterizedTest
     @MethodSource("com.recruitment.triangles.TriangleTest#validTriangleSides")
     void correctly_classifies_triangle(double a, double b, double c, Type type) {
-        Triangle t = new Triangle(a, b, c);
-        assertEquals(t.classify(), type);
+        assertEquals(Triangle.classify(a, b, c), type);
     }
 
     // TODO remove... this seems too weird.
