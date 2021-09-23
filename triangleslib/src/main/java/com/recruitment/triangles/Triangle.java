@@ -8,7 +8,6 @@ public class Triangle {
      */
     public enum Type { ISOSCELES, EQUILATERAL, SCALENE; }
 
-
     /**
      * Determine if the triangle defined by given side lengths can be considered
      * valid.
@@ -27,11 +26,8 @@ public class Triangle {
             && sideC < sideA + sideB;
     }
 
-
-    // Side lengths
     private final double a, b, c;
     private final Type type;
-
 
     /**
      * Construct a new Triangle.
@@ -50,7 +46,6 @@ public class Triangle {
             throw new IllegalArgumentException("Invalid triangle side lengths.");
         }
     }
-
 
     public double getSideA() { return this.a; }
     public double getSideB() { return this.b; }
